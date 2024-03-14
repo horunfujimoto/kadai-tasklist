@@ -34,6 +34,7 @@ class TasksController extends Controller
     {
         // タスクを作成
         $task = new task;
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
         // トップページへリダイレクトさせる
@@ -69,6 +70,7 @@ class TasksController extends Controller
         // idの値でタスクを検索して取得
         $task = task::findOrFail($id);
         // タスクを更新
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
         // トップページへリダイレクトさせる
