@@ -12,7 +12,7 @@ class TasksController extends Controller
     public function index()
     {
         // タスク一覧を取得
-        $tasks = task::all();
+        $tasks = Task::all();
         // タスク一覧ビューでそれを表示
         return view('tasks.index',[
             'tasks' => $tasks,
@@ -22,7 +22,7 @@ class TasksController extends Controller
     // getでtasks/createにアクセスされた場合の「新規登録画面表示処理」
     public function create()
     {
-        $task = new task;
+        $task = new Task;
         // タスク作成ビューを表示
         return view('tasks.create',[
             'task' => $task,    
@@ -39,7 +39,7 @@ class TasksController extends Controller
         ]);
         
         // タスクを作成
-        $task = new task;
+        $task = new Task;
         $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
@@ -52,7 +52,7 @@ class TasksController extends Controller
     {
         // idの値でタスクを検索して取得
         // findOrFail:レコードが存在しない時に404エラーを出す
-        $task = task::findOrFail($id);
+        $task = Task::findOrFail($id);
         // タスク詳細ビューでそれを表示
         return view('tasks.show', [
             'task' => $task,
@@ -63,7 +63,7 @@ class TasksController extends Controller
     public function edit($id)
     {
         // idの値でタスクを検索して取得
-        $task = task::findOrFail($id);
+        $task = Task::findOrFail($id);
         // タスク編集ビューでそれを表示
         return view('tasks.edit', [
             'task' => $task,
@@ -80,7 +80,7 @@ class TasksController extends Controller
         ]);
         
         // idの値でタスクを検索して取得
-        $task = task::findOrFail($id);
+        $task = Task::findOrFail($id);
         // タスクを更新
         $task->status = $request->status;
         $task->content = $request->content;
@@ -93,7 +93,7 @@ class TasksController extends Controller
     public function destroy($id)
     {
         // idの値でタスクを検索して取得
-        $task = task::findOrFail($id);
+        $task = Task::findOrFail($id);
         // タスクを削除
         $task->delete();
         // トップページへリダイレクトさせる
